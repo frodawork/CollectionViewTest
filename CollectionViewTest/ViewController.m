@@ -7,21 +7,30 @@
 //
 
 #import "ViewController.h"
-
+#import "CollectionViewCell.h"
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
-
+@synthesize collection;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.collection.delegate = self;
+    self.collection.dataSource = self;
+    [self.collection reloadData];
+    
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 5;
 }
-
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 3;
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    //cell.image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"image.png"]];
+    //CollectionViewCell *cell = [[CollectionViewCell alloc]init];
+    return cell;
+}
 @end
